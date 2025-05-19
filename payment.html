@@ -1,0 +1,233 @@
+<!-- payment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - CampusBytes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">CampusBytes</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Menu</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="cart.html" class="nav-link cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="payment-container fade-in">
+            <h2>Payment Details</h2>
+            <div class="payment-total">
+                <p>Total Amount: <span id="paymentTotal" class="total-amount">$0.00</span></p>
+            </div>
+            <form id="paymentForm" class="form">
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="16" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Expiry Date</label>
+                        <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div class="form-group half">
+                        <label>CVV</label>
+                        <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Cardholder Name</label>
+                    <input type="text" id="cardholderName" placeholder="John Doe" required>
+                </div>
+                <button type="submit" id="payButton" class="payment-button">Pay Now</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+
+
+
+
+
+
+<!-- Add this HTML code to your payment page -->
+<div class="payment-container">
+    <div class="payment-header">
+        <h2 class="payment-title">Payment Options</h2>
+        <div class="payment-total">Total Amount: ₹0.00</div>
+    </div>
+    
+    <div class="payment-methods">
+        <div class="payment-method" data-type="card">
+            <div class="payment-method-icon">💳</div>
+            <div class="payment-method-name">Credit/Debit Card</div>
+        </div>
+        
+        <div class="payment-method" data-type="upi">
+            <div class="payment-method-icon">📱</div>
+            <div class="payment-method-name">UPI</div>
+        </div>
+        
+        <div class="payment-method" data-type="netbanking">
+            <div class="payment-method-icon">🏦</div>
+            <div class="payment-method-name">Net Banking</div>
+        </div>
+        
+        <div class="payment-method" data-type="qr">
+            <div class="payment-method-icon">📲</div>
+            <div class="payment-method-name">Scan QR</div>
+        </div>
+    </div>
+    
+    <!-- Card Payment Form -->
+    <div class="payment-form card-form active">
+        <div class="form-group">
+            <label for="card_name">Name on Card</label>
+            <input type="text" id="card_name" name="card_name" placeholder="e.g. John Smith" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="card_number">Card Number</label>
+            <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+            <div class="card-icons">
+                <div class="card-icon"><img src="images/visa.png" alt="Visa"></div>
+                <div class="card-icon"><img src="images/mastercard.png" alt="Mastercard"></div>
+                <div class="card-icon"><img src="images/amex.png" alt="Amex"></div>
+            </div>
+        </div>
+        
+        <div class="card-row">
+            <div class="form-group">
+                <label for="expiry_date">Expiry Date</label>
+                <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="123" required maxlength="4">
+            </div>
+        </div>
+        
+        <button type="submit" class="payment-button">Pay Now</button>
+    </div>
+    
+    <!-- UPI Payment Form -->
+    <div class="payment-form upi-form">
+        <div class="upi-apps">
+            <div class="upi-app">
+                <img src="images/upi/gpay.png" alt="Google Pay">
+                <div class="upi-app-name">Google Pay</div>
+            </div>
+            
+            <div class="upi-app">
+                <img src="images/upi/phonepe.png" alt="PhonePe">
+                <div class="upi-app-name">PhonePe</div>
+            </div>
+            
+            <div class="upi-app">
+                <img src="images/upi/paytm.png" alt="Paytm">
+                <div class="upi-app-name">Paytm</div>
+            </div>
+            
+            <div class="upi-app">
+                <img src="images/upi/bhim.png" alt="BHIM">
+                <div class="upi-app-name">BHIM</div>
+            </div>
+            
+            <div class="upi-app">
+                <img src="images/upi/amazon.png" alt="Amazon Pay">
+                <div class="upi-app-name">Amazon Pay</div>
+            </div>
+        </div>
+        
+        <div class="form-divider">
+            <span class="form-divider-text">OR</span>
+        </div>
+        
+        <div class="form-group">
+            <label for="upi_id">Enter UPI ID</label>
+            <input type="text" id="upi_id" name="upi_id" placeholder="yourname@upi" required>
+        </div>
+        
+        <button type="submit" class="payment-button">Pay ₹00.00</button>
+    </div>
+    
+    <!-- Net Banking Form -->
+    <div class="payment-form netbanking-form">
+        <div class="bank-options">
+            <div class="bank-option">
+                <img src="images/banks/sbi.png" alt="SBI">
+                <div class="bank-name">SBI</div>
+            </div>
+            
+            <div class="bank-option">
+                <img src="images/banks/hdfc.png" alt="HDFC">
+                <div class="bank-name">HDFC</div>
+            </div>
+            
+            <div class="bank-option">
+                <img src="images/banks/icici.png" alt="ICICI">
+                <div class="bank-name">ICICI</div>
+            </div>
+            
+            <div class="bank-option">
+                <img src="images/banks/axis.png" alt="Axis">
+                <div class="bank-name">Axis</div>
+            </div>
+            
+            <div class="bank-option">
+                <img src="images/banks/kotak.png" alt="Kotak">
+                <div class="bank-name">Kotak</div>
+            </div>
+            
+            <div class="bank-option">
+                <img src="images/banks/pnb.png" alt="PNB">
+                <div class="bank-name">PNB</div>
+            </div>
+            
+            <div class="bank-option">
+                <img src="images/banks/bob.png" alt="BOB">
+                <div class="bank-name">BOB</div>
+            </div>
+            
+            <div class="bank-option">
+                <img src="images/banks/canara.png" alt="Canara">
+                <div class="bank-name">Canara</div>
+            </div>
+        </div>
+        
+        <button type="submit" class="payment-button">Pay ₹00.00</button>
+    </div>
+    
+    <!-- QR Code Form -->
+    <div class="payment-form qr-form">
+        <div class="qr-code">
+            <img src="images/qr-code.png" alt="Payment QR Code">
+        </div>
+        
+        <div class="qr-instructions">
+            <p>Scan this QR code with any UPI app to pay</p>
+            <p>Amount: ₹00.00</p>
+        </div>
+        
+        <button type="button" class="payment-button">I've Completed the Payment</button>
+    </div>
+</div>
+</body>
+</html>
